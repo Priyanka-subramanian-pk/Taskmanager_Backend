@@ -73,7 +73,9 @@ return res.status(200).json({
         const { id } = req.params;
         const { taskTitle, taskDescription } = req.body;
            
-        const userId = req.user.userId;
+        const userId=req.user.userId
+        console.log("userID",userId);
+        
 
         // Validate that at least one field is provided
            if (!taskTitle && !taskDescription) {
