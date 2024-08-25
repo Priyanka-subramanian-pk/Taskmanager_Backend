@@ -96,9 +96,9 @@ return res.status(200).json({
   }
 
         // Ensure the task belongs to the user
-        if (task.userId.toString() !== userId) {
-            return res.status(403).json({
-                message: 'You are not authorized to update this task.',
+        if (!task.userId) {
+            return res.status(400).json({
+                message: 'Task is missing a userId.',
                 status: 'failure',
                 error: true
             });
