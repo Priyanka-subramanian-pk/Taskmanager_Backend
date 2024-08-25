@@ -105,6 +105,49 @@ module.exports = {
     });
   },
 
+// -==========gettaskbyId=============
+
+getTaskById: async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user.userId;
+          
+  // Find the task by ID
+  const task = await Task.findById(id);
+    // Check if the task exists
+    if (!task) {
+      return res.status(404).json({
+          message: "Task not found.",
+          status: "failure",
+          error: true,
+      });
+  }
+   // Ensure the task belongs to the user
+   if (task.userId.toString() !== userId) {
+    return res.status(403).json({
+        message: "You are not authorized to view this task.",
+        status: "failure",
+        error: true,
+    });
+}
+
+        // Respond with the task details
+        return res.status(200).json({
+          message: "Task fetched successfully!",
+          status: "success",
+          error: false,
+          task,
+      });
+
+
+
+
+},
+
+
+
+
+
+
   // =============Updatedtask===============
 
   updateTask: async (req, res) => {

@@ -11,5 +11,6 @@ router
 .post('/createtask',tokenVerifyUser,tryCAtchMiddleware(taskController.createTask))
 .get("/getalltasks",tokenVerifyUser,tryCAtchMiddleware(taskController.getAllTasks))
 .put('/updatetask/:id',tokenVerifyUser,tryCAtchMiddleware(taskController.updateTask))
+.get('/gettaskbyid/:id',tokenVerifyUser,tryCAtchMiddleware(taskController.getTaskById))
 .delete('/deletetask/:id',tokenVerifyUser,tryCAtchMiddleware(taskController.deleteTask))
 module.exports = router;
