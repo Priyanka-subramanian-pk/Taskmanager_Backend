@@ -15,14 +15,13 @@ const taskSchema = new Schema({
         type: String,
         required: true
     },
-    taskStatus:
-     {
+    taskStatus: {
         type: String,
         enum: ['todo', 'inprogress', 'done'],
         default: 'todo'
-    },
-  
-    // Add other fields as necessary
+    }
+}, {
+    timestamps: true // This will add createdAt and updatedAt fields
 });
 
 module.exports = mongoose.model('Task', taskSchema);

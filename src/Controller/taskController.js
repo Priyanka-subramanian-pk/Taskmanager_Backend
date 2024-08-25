@@ -2,11 +2,52 @@ const Task = require("../Model/taskModel");
 const User = require("../Model/userModel");
 
 module.exports = {
+  // createTask: async (req, res) => {
+  //   const { taskTitle, taskDescription } = req.body;
+  //   const userId = req.user.userId;
+
+  //   // --------Validate input
+  //   if (!taskTitle || !taskDescription) {
+  //     return res.status(400).json({
+  //       message: "Task title and description are required.",
+  //       status: "failure",
+  //       error: true,
+  //     });
+  //   }
+
+  //   const user = await User.findById(userId);
+  //   if (!user) {
+  //     return res.status(400).json({
+  //       message: "No user found",
+  //       status: "failure",
+  //     });
+  //   }
+
+  //   //---------- Create a new task instance
+  //   const newTask = new Task({
+  //     userId,
+  //     taskTitle,
+  //     taskDescription,
+  //   });
+
+  //   // ---------Save the task to the database
+  //   const savedTask = await newTask.save();
+
+  //   // --------Respond with success
+  //   return res.status(201).json({
+  //     message: "Task created successfully!",
+  //     status: "success",
+  //     error: false,
+  //     task: savedTask,
+  //   });
+  // },
+
+
   createTask: async (req, res) => {
     const { taskTitle, taskDescription } = req.body;
     const userId = req.user.userId;
 
-    // --------Validate input
+    // Validate input
     if (!taskTitle || !taskDescription) {
       return res.status(400).json({
         message: "Task title and description are required.",
@@ -23,25 +64,28 @@ module.exports = {
       });
     }
 
-    //---------- Create a new task instance
+    // Create a new task instance
     const newTask = new Task({
       userId,
       taskTitle,
       taskDescription,
     });
 
-    // ---------Save the task to the database
+    // Save the task to the database
     const savedTask = await newTask.save();
 
-    // --------Respond with success
+    // Respond with success including created date and time
     return res.status(201).json({
       message: "Task created successfully!",
       status: "success",
       error: false,
-      task: savedTask,
+      task: savedTask, // This includes createdAt and updatedAt
     });
   },
-  //==============getalltasks===========
+
+
+  
+  // //==============getalltasks===========
   getAllTasks: async (req, res) => {
     const tasks = await Task.find();
     // Check if tasks are found
