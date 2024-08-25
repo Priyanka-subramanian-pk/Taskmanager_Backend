@@ -43,7 +43,7 @@ const user = await User.findById(userId);
             });
 
     },
-// ===============getalltasks===========
+//==============getalltasks===========
 getAllTasks:async(req,res)=>{
     const tasks = await Task.find();
     // Check if tasks are found
@@ -71,20 +71,32 @@ return res.status(200).json({
 
     updateTask:async(req,res)=>{
         const { id } = req.params;
-        const { taskTitle, taskDescription } = req.body;
+        const { taskTitle, taskDescription,taskStatus } = req.body;
            
         const userId=req.user.userId
         console.log("userID",userId);
         
 
+        
         // Validate that at least one field is provided
-           if (!taskTitle && !taskDescription) {
+           if (!taskTitle && !taskDescription && !taskStatus) {
             return res.status(400).json({
                 message: 'No fields provided to update.',
                 status: 'failure',
                 error: true
             });
         }
+
+
+         // Validate task status
+         if (taskStatus && !['todo', 'inprogress', 'done'].includes(taskStatus)) {
+            return res.status(400).json({
+                message: 'Invalid task status provided.',
+                status: 'failure',
+                error: true
+            });
+        }
+
   // Find the task by ID
   const task = await Task.findById(id);
   if (!task) {
@@ -104,15 +116,19 @@ return res.status(200).json({
             });
         }
             
- // Update the task
- const updatedTask = await Task.findByIdAndUpdate(
-    id,
-    { taskTitle, taskDescription },
-    { new: true, runValidators: true } // Return the updated document and run validators
-);
+//  // Update the task
+//  const updatedTask = await Task.findByIdAndUpdate(
+//     id,
+//     { taskTitle, taskDescription },
+//     { new: true, runValidators: true } // Return the updated document and run validators
+// );
 
-
-          
+  // Update the task
+  task.taskTitle = taskTitle || task.taskTitle;
+  task.taskDescription = taskDescription || task.taskDescription;
+  task.taskStatus = taskStatus || task.taskStatus;
+  const updatedTask = await task.save();
+ 
              // Respond with the updated task
              return res.status(200).json({
                 message: 'Task updated successfully!',

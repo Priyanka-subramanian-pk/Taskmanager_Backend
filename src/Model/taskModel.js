@@ -15,6 +15,13 @@ const taskSchema = new Schema({
         type: String,
         required: true
     },
+    taskStatus:
+     {
+        type: String,
+        enum: ['todo', 'inprogress', 'done'],
+        default: 'todo'
+    },
+  
     // Add other fields as necessary
 });
 
