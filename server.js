@@ -15,7 +15,7 @@ connectDB()
 // })
 
 app.use('/api/auth',authUser)
-app.use('/api/',authTask)
+app.use('/api',authTask)
 
 app.listen(port,()=>{
     console.log(`server is running on port ${port}`)

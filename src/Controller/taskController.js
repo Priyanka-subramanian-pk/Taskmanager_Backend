@@ -112,9 +112,9 @@ getTaskById: async (req, res) => {
   const userId = req.user.userId;
           
   // Find the task by ID
-  const task = await Task.findById(id);
+  const tasks = await Task.findById(id);
     // Check if the task exists
-    if (!task) {
+    if (!tasks) {
       return res.status(404).json({
           message: "Task not found.",
           status: "failure",
@@ -122,7 +122,7 @@ getTaskById: async (req, res) => {
       });
   }
    // Ensure the task belongs to the user
-   if (task.userId.toString() !== userId) {
+   if (tasks.userId.toString() !== userId) {
     return res.status(403).json({
         message: "You are not authorized to view this task.",
         status: "failure",
@@ -135,7 +135,7 @@ getTaskById: async (req, res) => {
           message: "Task fetched successfully!",
           status: "success",
           error: false,
-          task,
+          tasks,
       });
 
 
