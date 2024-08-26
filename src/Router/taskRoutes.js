@@ -8,9 +8,9 @@ const taskController = require('../Controller/taskController');
 
 // Route to create a new task
 router
-.post('/createtask',tokenVerifyUser,tryCAtchMiddleware(taskController.createTask))
-.get("/getalltasks",tokenVerifyUser,tryCAtchMiddleware(taskController.getAllTasks))
-.put('/updatetask/:id',tokenVerifyUser,tryCAtchMiddleware(taskController.updateTask))
-.get('/gettaskbyid/:id',tokenVerifyUser,tryCAtchMiddleware(taskController.getTaskById))
-.delete('/deletetask/:id',tokenVerifyUser,tryCAtchMiddleware(taskController.deleteTask))
+.post('/tasks',tokenVerifyUser,tryCAtchMiddleware(taskController.createTask))
+.get("/tasks",tokenVerifyUser,tryCAtchMiddleware(taskController.getAllTasks))
+.put('/tasks/:id',tokenVerifyUser,tryCAtchMiddleware(taskController.updateTask))
+.get('/tasks/:id',tokenVerifyUser,tryCAtchMiddleware(taskController.getTaskById))
+.delete('/tasks/:id',tokenVerifyUser,tryCAtchMiddleware(taskController.deleteTask))
 module.exports = router;

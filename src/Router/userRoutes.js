@@ -5,8 +5,8 @@ const user=require('../Controller/UserController')
 
 
 router
-.post('/createuser',tryCAtchMiddleware(user.userRegister))
-.post("/loginuser",tryCAtchMiddleware(user.userLogin))
+.post('/register',tryCAtchMiddleware(user.userRegister))
+.post("/login",tryCAtchMiddleware(user.userLogin))
 
 
 module.exports=router
