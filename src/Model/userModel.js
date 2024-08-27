@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    minlength: 6,
+    minlength: 8,
   },
   email: {
     type: String,
