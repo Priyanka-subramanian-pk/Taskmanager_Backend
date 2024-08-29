@@ -42,6 +42,7 @@ module.exports = {
       userId,
       taskTitle,
       taskDescription,
+      taskStatus
     });
 
     const savedTask = await newTask.save();
