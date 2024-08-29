@@ -78,6 +78,7 @@ module.exports = {
         userId: task.userId,
         taskTitle: task.taskTitle,
         taskDescription: task.taskDescription,
+        taskStatus:task.taskStatus,
         createdAt: formatDateTime(task.createdAt),
         updatedAt: formatDateTime(task.updatedAt),
       })),
