@@ -110,7 +110,7 @@ module.exports = {
       message: "Task fetched successfully!",
       status: "success",
       error: false,
-      task: {
+      tasks: {
         _id: task._id,
         userId: task.userId,
         taskTitle: task.taskTitle,
